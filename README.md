@@ -1,2 +1,8 @@
 # CodeExample
-A code example of a project I worked on named Near Field Gladiator. 
+A code example of a project I worked on named Near Field Gladiator (https://fshh.itch.io/near-field-gladiator). 
+
+This script is designed to control what enemies are spawned into the scene it is in. It is for interal level design use in the Unity Editor.
+
+To use this script, a user would attach it to any GameObject in the scene and use the Unity Inspector to input the enemies they want to spawn in. In the inspector, there will be a list of "Levels" exposed to be edited. Each Level contains the types of enemies to spawn in it, each with a minimum and maximum amount to spawn, the amount of time in which the enemies are spawning, the amount of time after which to switch to the next level if the player hasn't killed all of the enemies yet, and the total amount of enemies to spawn. The total amount of enemies to spawn is clamped between the sum of each enemy type's minimum spawns and the sum of the maximum spawns. It can also be set to -1 to indicate that it should be a random number between the sum of minimums and sum of maximums.
+
+When a level is entered a list of enemies to spawn in it is created. This list is first populated with the minimum amount of enemies to spawn in, then any extra spawns, determined by the total to spawn minus the current count of the list, are added to the list. The enemy types of the extra spawns are randomly pulled from a dictionary of enemy types to an int that is initially the enemy type's max spawns minus min spawns. Each time an enemy type is used from the dictionary, the int associated with it is reduced by one until it hits 0 at which point that enemy type is removed from the dictionary.
